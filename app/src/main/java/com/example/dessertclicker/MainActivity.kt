@@ -183,7 +183,9 @@ private fun DessertClickerApp(
             val intentContext = LocalContext.current
             val layoutDirection = LocalLayoutDirection.current
             DessertClickerAppBar(
-                onShareButtonClicked = { /* 99- Xa se actualizará
+                onShareButtonClicked = {
+                    // ------------------ FALTA ----------------------
+                    /* 99- Xa se actualizará
                     shareSoldDessertsInformation(
                         intentContext = intentContext,
                         dessertsSold = dessertsSold,
@@ -203,18 +205,20 @@ private fun DessertClickerApp(
         }
     ) { contentPadding ->
         DessertClickerScreen(
-            //5- saco los datos iniciales del ViewModel o del UiState
+            //5 -- saco los datos iniciales del ViewModel o del UiState
             revenue = dessertUiState.revenue,
             dessertsSold = dessertUiState.dessertsSold,
             dessertImageId = dessertUiState.currentDessertImageId,
-            onDessertClicked = { dessertViewModel.dessertClick()  },
+            onDessertClicked = { dessertViewModel.dessertClick(Datasource.dessertList)  },
             modifier = Modifier.padding(contentPadding)
+            //8 -- Termino de modificar la llamada
         )
     }
 }
 
 @Composable
 private fun DessertClickerAppBar(
+    // ------------------ FALTA ----------------------
     onShareButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {

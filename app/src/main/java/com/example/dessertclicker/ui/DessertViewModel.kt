@@ -1,7 +1,6 @@
 package com.example.dessertclicker.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.dessertclicker.determineDessertToShow
 import com.example.dessertclicker.model.Dessert
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,15 +11,15 @@ class DessertViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(DessertUiState())
     val uiState: StateFlow<DessertUiState> = _uiState.asStateFlow()
 
-    //2-- Defino resetDessert
+    //2 -- Defino resetDessert
     fun resetDessert(){
         _uiState.value = DessertUiState()
     }
 
     //6 -- Muevo aquí la función del click
-    fun dessertClick(){
+    fun dessertClick(desserts: List<Dessert>, ){
 
-        val dessertToShow = determineDessertToShow(desserts, dessertsSold)
+        val dessertToShow = determineDessertToShow(desserts, _uiState.value.dessertsSold)
         // Actualizamos el beneficio
         _uiState.update { currentState ->
             currentState.copy(
@@ -32,9 +31,10 @@ class DessertViewModel : ViewModel() {
                 currentDessertPrice = dessertToShow.price,
             )
         }
-    }
 
-    fun determineDessertToShow(desserts: List<Dessert>,dessertsSold: Int): Dessert {
+    }
+    //7 -- Muevo también la función que me determine el postre
+   private fun determineDessertToShow(desserts: List<Dessert>,dessertsSold: Int): Dessert {
         var dessertToShow = desserts.first()
         for (dessert in desserts) {
             if (dessertsSold >= dessert.startProductionAmount) {
