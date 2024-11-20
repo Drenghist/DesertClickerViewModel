@@ -209,7 +209,7 @@ private fun DessertClickerApp(
             revenue = dessertUiState.revenue,
             dessertsSold = dessertUiState.dessertsSold,
             dessertImageId = dessertUiState.currentDessertImageId,
-            onDessertClicked = { dessertViewModel.dessertClick(Datasource.dessertList)  },
+            onDessertClicked = { dessertViewModel.dessertClick(desserts)  },
             modifier = Modifier.padding(contentPadding)
             //8 -- Termino de modificar la llamada
         )
