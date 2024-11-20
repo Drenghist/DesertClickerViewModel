@@ -128,28 +128,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/**
- * Determine which dessert to show.
- */
-fun determineDessertToShow(
-    desserts: List<Dessert>,
-    dessertsSold: Int
-): Dessert {
-    var dessertToShow = desserts.first()
-    for (dessert in desserts) {
-        if (dessertsSold >= dessert.startProductionAmount) {
-            dessertToShow = dessert
-        } else {
-            // The list of desserts is sorted by startProductionAmount. As you sell more desserts,
-            // you'll start producing more expensive desserts as determined by startProductionAmount
-            // We know to break as soon as we see a dessert who's "startProductionAmount" is greater
-            // than the amount sold.
-            break
-        }
-    }
 
-    return dessertToShow
-}
 
 /**
  * Share desserts sold information using ACTION_SEND intent
@@ -204,12 +183,12 @@ private fun DessertClickerApp(
             val intentContext = LocalContext.current
             val layoutDirection = LocalLayoutDirection.current
             DessertClickerAppBar(
-                onShareButtonClicked = {
+                onShareButtonClicked = { /* Xa se actualizará
                     shareSoldDessertsInformation(
                         intentContext = intentContext,
                         dessertsSold = dessertsSold,
                         revenue = revenue
-                    )
+                    ) */
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -226,19 +205,9 @@ private fun DessertClickerApp(
         DessertClickerScreen(
             //5- saco los datos iniciales del ViewModel o del UiState
             revenue = dessertUiState.revenue,
-            dessertsSold = dessertsSold,
-            dessertImageId = currentDessertImageId,
-            onDessertClicked = {
-
-                // Update the revenue
-                revenue += currentDessertPrice
-                dessertsSold++
-
-                // Show the next dessert
-                val dessertToShow = determineDessertToShow(desserts, dessertsSold)
-                currentDessertImageId = dessertToShow.imageId
-                currentDessertPrice = dessertToShow.price
-            },
+            dessertsSold = dessertUiState.dessertsSold,
+            dessertImageId = dessertUiState.currentDessertImageId,
+            onDessertClicked = { dessertViewModel.dessertClick()  },
             modifier = Modifier.padding(contentPadding)
         )
     }
