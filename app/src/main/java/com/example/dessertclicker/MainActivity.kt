@@ -183,7 +183,7 @@ private fun DessertClickerApp(
             val intentContext = LocalContext.current
             val layoutDirection = LocalLayoutDirection.current
             DessertClickerAppBar(
-                onShareButtonClicked = { /* Xa se actualizará
+                onShareButtonClicked = { /* 99- Xa se actualizará
                     shareSoldDessertsInformation(
                         intentContext = intentContext,
                         dessertsSold = dessertsSold,
