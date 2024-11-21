@@ -129,12 +129,10 @@ private fun DessertClickerApp(
     //4 -- Creo la variable del DessertUiState
     val dessertUiState by dessertViewModel.uiState.collectAsState()
 
-    /*Esto me lo he subido
+    /*Esto me lo he subido al uiState
     var revenue by rememberSaveable { mutableStateOf(0) }
     var dessertsSold by rememberSaveable { mutableStateOf(0) }
-
     val currentDessertIndex by rememberSaveable { mutableStateOf(0) }
-
     var currentDessertPrice by rememberSaveable {
         mutableStateOf(desserts[currentDessertIndex].price)
     }
